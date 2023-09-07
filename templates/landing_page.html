@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        body {
+            background-color: #1E1E1E; /* Dark background color */
+            color: #FFFFFF; /* Text color */
+            text-align: center; /* Center-align text */
+            font-family: Arial, sans-serif; /* Specify font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .options-box {
+            background-color: #333333; /* Box background color (dark grey) */
+            color: #FFFFFF; /* Text color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+        }
+
+        h1 {
+            color: #FF4500; /* Header text color (orange) */
+        }
+
+        p {
+            color: #CCCCCC; /* Text color (light grey) */
+        }
+
+        a {
+            display: block; /* Display links as blocks to separate them */
+            margin-top: 20px; /* Add space between links */
+            color: #FF4500; /* Link color (orange) */
+            text-decoration: none; /* Remove underlines from links */
+            transition: color 0.3s; /* Smooth color transition on hover */
+        }
+
+        a:hover {
+            color: #FF6347; /* Link color on hover (lighter orange) */
+        }
+    </style>
+</head>
+<body>
+    <div class="options-box">
+        <h1>Welcome to the DDoS Detection App</h1>
+        <p>Please choose an option:</p>
+        <a href="/generate_traffic">Simulate Traffic</a>
+        <a href="/predict_datapoint">Predict Data Point</a>
+    </div>
+</body>
+</html>

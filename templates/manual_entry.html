@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Data Entry</title>
+    <style>
+        body {
+            background-color: #1E1E1E; /* Dark background color */
+            color: #FFFFFF; /* Text color */
+            text-align: center; /* Center-align text */
+            font-family: Arial, sans-serif; /* Specify font */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        h1 {
+            color: #FF4500; /* Header text color (orange) */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            width: 80%; /* Adjust the width */
+            max-width: 500px; /* Set a maximum width */
+        }
+
+        label {
+            margin-top: 10px;
+            color: #CCCCCC; /* Label text color (light grey) */
+            text-align: left; /* Left-align label text */
+            width: 100%; /* Make labels full-width */
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            background-color: #333333; /* Input background color (dark grey) */
+            color: #FFFFFF; /* Input text color */
+            border: none;
+            border-radius: 5px;
+            width: 100%; /* Make input fields full-width */
+        }
+
+        button[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FF4500; /* Button background color (orange) */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #FF6347; /* Button background color on hover (lighter orange) */
+        }
+
+        #result {
+            margin-top: 20px;
+            width: 80%; /* Adjust the width */
+            max-width: 500px; /* Set a maximum width */
+        }
+
+        img {
+            max-width: 100%; /* Ensure images don't overflow the container */
+        }
+    </style>
+    <!-- Add your CSS styles or link to external CSS files here -->
+</head>
+<body>
+    <h1>Manual Data Entry</h1>
+    <div id="result">
+        {% if result is not none %}
+            <h2>Prediction Result:</h2>
+            {% if result == "BENIGN" %}
+                <p>The predicted nature of the data point is: {{ result }}</p>
+            {% else %}
+                <p style="color: red;">Warning!! The predicted nature of the data point is: {{ result }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+    <!-- Your HTML content for manual data entry goes here -->
+
+    <form method="POST" action="/predict_datapoint">
+        <!-- Add input fields for all features -->
+        <label for="Fwd Packet Length_Max">Fwd Packet Length Max:</label>
+        <input type="text" name="Fwd Packet Length Max" id="Fwd Packet Length Max" required>
+        <br>
+        <label for="Flow IAT Std">Flow IAT Std:</label>
+        <input type="text" name="Flow IAT Std" id="Flow IAT Std" required>
+        <br>
+        <label for="Fwd Packet Length Std">Fwd Packet Length Std:</label>
+        <input type="text" name="Fwd Packet Length Std" id="Fwd Packet Length Std" required>
+        <br>
+        <label for="Fwd IAT Total">Fwd IAT Total:</label>
+        <input type="text" name="Fwd IAT Total" id="Fwd IAT Total" required>
+        <br>
+        <label for="Fwd Packet Length Mean">Fwd Packet Length Mean:</label>
+        <input type="text" name="Fwd Packet Length Mean" id="Fwd Packet Length Mean" required>
+        <br>
+        <label for="Flow IAT Mean">Flow IAT Mean:</label>
+        <input type="text" name="Flow IAT Mean" id="Flow IAT Mean" required>
+        <br>
+        <label for="Bwd Packet Length Mean">Bwd Packet Length Mean:</label>
+        <input type="text" name="Bwd Packet Length Mean" id="Bwd Packet Length Mean" required>
+         <br>
+        <label for="Flow IAT Max">Flow IAT Max:</label>
+        <input type="text" name="Flow IAT Max" id="Flow IAT Max" required>
+         <br>
+        <label for="Bwd Packet Length Std">Bwd Packet Length Std:</label>
+        <input type="text" name="Bwd Packet Length Std" id="Bwd Packet Length Std" required>
+        <!-- Add a submit button -->
+
+        <button type="submit">Predict</button>
+    </form>
+
+</body>
+</html>

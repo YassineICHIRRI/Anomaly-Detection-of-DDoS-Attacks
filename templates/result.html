@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DDoS Detection Result</title>
+</head>
+<body>
+    <h1>DDoS Detection Result</h1>
+    <p>Number of Samples: {{ samples }}</p>
+    <p>Benign Attacks Detected: {{ benign_count }}</p>
+    <p>DDoS Attacks Detected: {{ ddos_count }}</p>
+    <h2>Data Visualization</h2>
+    <img src="data:image/png;base64,{{ img_base64 }}" alt="Data Visualization">
+</body>
+</html>

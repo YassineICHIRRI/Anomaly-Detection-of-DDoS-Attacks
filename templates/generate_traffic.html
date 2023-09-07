@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Traffic</title>
+    <style>
+        body {
+            background-color: #1E1E1E; /* Dark background color */
+            color: #FFFFFF; /* Text color */
+            text-align: center; /* Center-align text */
+            font-family: Arial, sans-serif; /* Specify font */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #FF4500; /* Header text color (orange) */
+        }
+
+        form {
+            background-color: #333333; /* Form background color (dark grey) */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            color: #CCCCCC; /* Label text color (light grey) */
+            margin-top: 10px;
+        }
+
+        input[type="number"] {
+            padding: 5px;
+            background-color: #333333; /* Input background color (dark grey) */
+            color: #FFFFFF; /* Input text color */
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+            margin-top: 5px;
+        }
+
+        button[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FF4500; /* Button background color (orange) */
+            color: #FFFFFF; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #FF6347; /* Button background color on hover (lighter orange) */
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%; /* Ensure images don't overflow the container */
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("generate_traffic_form");
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+        
+                const samples = document.getElementById("samples").value;
+        
+                // Send a POST request to the Flask route
+                fetch("/generate_traffic", {
+                    method: "POST",
+                    body: new URLSearchParams({ samples }),
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the page content with the received data
+                    document.getElementById("result").innerHTML = `
+                        <p>Number of Samples: ${data.samples}</p>
+                        <p>Benign Instances Detected: ${data.benign_count}</p>
+                        <p>DDoS Attacks Instances Detected: ${data.ddos_count}</p>
+                        <h2>Data Visualization</h2>
+                        <img src="data:image/png;base64,${data.img_base64}" alt="Data Visualization">
+                    `;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Generate Traffic</h1>
+    <form method="POST" action="/generate_traffic" id="generate_traffic_form">
+        <label for="samples">Number of Samples:</label>
+        <input type="number" name="samples" id="samples" required>
+        <button type="submit">Generate</button>
+    </form>
+    <div id="result">
+        <!-- The results will be displayed here -->
+    </div>
+</body>
+</html>
